@@ -1,9 +1,6 @@
 FROM php:5.6-apache
 MAINTAINER Paolo Josef Abadesco <pjabadesco@gmail.com>
 
-ARG PATH_WWW=www
-ENV PATH_WWW $PATH_WWW
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libcurl4-openssl-dev \
     libedit-dev \
@@ -47,9 +44,9 @@ RUN echo 'date.timezone = Asia/Manila' >> /usr/local/etc/php/php.ini
 COPY conf/php.ini /usr/local/etc/php/
 COPY conf.d/ /usr/local/etc/php/conf.d/
 COPY conf/httpd.conf /etc/apache2/sites-available/000-default.conf
-COPY $PATH_WWW/ /var/www/html/
+COPY ./ /var/www/html/
 
-COPY $PATH_WWW/_docker/run.sh /usr/local/bin/docker-run.sh
+COPY ./_docker/run.sh /usr/local/bin/docker-run.sh
 RUN chmod +x /usr/local/bin/docker-run.sh
 
 RUN a2enmod rewrite headers
