@@ -49,7 +49,7 @@ COPY conf.d/ /usr/local/etc/php/conf.d/
 COPY conf/httpd.conf /etc/apache2/sites-available/000-default.conf
 COPY $PATH_WWW/ /var/www/html/
 
-COPY $PATH_WWW/docker-run.sh /usr/local/bin/docker-run.sh
+COPY $PATH_WWW/_docker/run.sh /usr/local/bin/docker-run.sh
 RUN chmod +x /usr/local/bin/docker-run.sh
 
 RUN a2enmod rewrite headers
