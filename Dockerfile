@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpng-dev \
     unixodbc \
     unixodbc-dev \
+    nfs-common \
     && ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/libsybdb.so \
     && ln -s /usr/lib/x86_64-linux-gnu/libsybdb.a /usr/lib/libsybdb.a \
     && apt-get clean \
@@ -43,6 +44,7 @@ RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
 RUN docker-php-ext-install gd pdo pdo_mysql curl json mbstring mysqli pdo_dblib mcrypt zip mysql mssql pdo_odbc opcache
 
 RUN echo 'date.timezone = Asia/Manila' >> /usr/local/etc/php/php.ini
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 COPY conf/php.ini /usr/local/etc/php/
 COPY conf.d/ /usr/local/etc/php/conf.d/
