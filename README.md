@@ -13,8 +13,8 @@ docker push pjabadesco/php56-apache-mssql-mysql
 docker stop live-app
 docker rm live-app
 
-docker build -t pjabadesco/php56-apache-mssql-mysql:1.1 .
-docker push pjabadesco/php56-apache-mssql-mysql:1.1
+docker build -t pjabadesco/php56-apache-mssql-mysql:1.2 .
+docker push pjabadesco/php56-apache-mssql-mysql:1.2
 
 docker build -t pjabadesco/php56-apache-mssql-mysql:latest .
 docker push pjabadesco/php56-apache-mssql-mysql:latest

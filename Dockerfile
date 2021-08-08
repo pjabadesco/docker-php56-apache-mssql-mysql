@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unixodbc \
     unixodbc-dev \
     sendmail \
-    libpng-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libfreetype6-dev \
+    exiftool libpng-dev libjpeg62-turbo-dev libpng-dev libxpm-dev libfreetype6-dev \
     && ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/libsybdb.so \
     && ln -s /usr/lib/x86_64-linux-gnu/libsybdb.a /usr/lib/libsybdb.a \
     && apt-get clean \
@@ -39,6 +39,8 @@ RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
     --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
     --enable-gd-native-ttf
 
+RUN docker-php-ext-configure exif
+
 # RUN set -x \
 #     && cd /usr/src/php/ext/odbc \
 #     && phpize \
@@ -46,7 +48,9 @@ RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
 #     && ./configure --with-unixODBC=shared,/usr \
 #     && docker-php-ext-install odbc
 
-RUN docker-php-ext-install gd pdo pdo_mysql curl json mbstring mysqli pdo_dblib mcrypt zip mysql mssql pdo_odbc opcache
+RUN docker-php-ext-install exif gd pdo pdo_mysql curl json mbstring mysqli pdo_dblib mcrypt zip mysql mssql pdo_odbc opcache
+
+RUN docker-php-ext-enable exif
 
 RUN echo 'date.timezone = Asia/Manila' >> /usr/local/etc/php/php.ini
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
