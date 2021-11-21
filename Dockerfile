@@ -69,7 +69,7 @@ COPY conf/httpd.conf /etc/apache2/sites-available/000-default.conf
 RUN  chmod 755 /var/www/html -R
 COPY --chown=www-data:www-data www/ /var/www/html/
 
-RUN a2enmod rewrite headers 
+RUN a2enmod rewrite headers remoteip
 
 # Create Volume
 # VOLUME ['/etc/apache2/sites-enabled','/var/www','/var/log/apache2']
