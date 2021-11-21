@@ -1,7 +1,7 @@
 docker-compose build
 
-docker build -t pjabadesco/php56-apache-mssql-mysql:1.4 .
-docker push pjabadesco/php56-apache-mssql-mysql:1.4
+docker build -t pjabadesco/php56-apache-mssql-mysql:1.7 .
+docker push pjabadesco/php56-apache-mssql-mysql:1.7
 
 docker build -t pjabadesco/php56-apache-mssql-mysql:latest .
 docker push pjabadesco/php56-apache-mssql-mysql:latest
