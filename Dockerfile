@@ -58,9 +58,11 @@ RUN pecl install redis-2.2.8 \
 #     && mv phpredis-2.2.7 /usr/src/php/ext/redis \
 #     && docker-php-ext-install redis
 
-
 RUN docker-php-ext-configure exif \
     && docker-php-ext-install bcmath calendar gettext exif gd pdo pdo_mysql curl json mbstring mysqli pdo_dblib mcrypt zip mysql mssql pdo_odbc opcache
+
+RUN pecl install mongo \
+    && docker-php-ext-enable mongo
 
 COPY conf/php.ini /usr/local/etc/php/
 COPY conf.d/ /usr/local/etc/php/conf.d/
