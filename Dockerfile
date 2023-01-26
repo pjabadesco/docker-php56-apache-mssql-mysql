@@ -64,6 +64,13 @@ RUN docker-php-ext-configure exif \
 RUN pecl install mongo \
     && docker-php-ext-enable mongo
 
+# Install Ioncube Loader
+RUN curl -L https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -o ioncube.tar.gz \
+    && tar -xvzf ioncube.tar.gz \
+    && mv ioncube/ioncube_loader_lin_5.6.so /usr/local/lib/php/extensions/* \
+    && rm -rf ioncube.tar.gz ioncube \
+    && echo "zend_extension=ioncube_loader_lin_5.6.so" > /usr/local/etc/php/conf.d/00_docker-php-ext-ioncube_loader_lin_5.6.ini    
+
 COPY conf/php.ini /usr/local/etc/php/
 COPY conf.d/ /usr/local/etc/php/conf.d/
 COPY conf/httpd.conf /etc/apache2/sites-available/000-default.conf
