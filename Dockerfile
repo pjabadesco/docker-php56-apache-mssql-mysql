@@ -64,6 +64,7 @@ RUN docker-php-ext-configure exif \
 RUN pecl install mongo \
     && docker-php-ext-enable mongo
 
+COPY extensions/ /usr/local/lib/php/extensions/
 COPY conf/php.ini /usr/local/etc/php/
 COPY conf.d/ /usr/local/etc/php/conf.d/
 COPY conf/httpd.conf /etc/apache2/sites-available/000-default.conf
